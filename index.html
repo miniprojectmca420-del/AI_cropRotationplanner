@@ -3,124 +3,242 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AI-Driven Crop Rotation Planner</title>
-
-  <!-- FontAwesome Icons (Free) -->
+  <title>AI Crop Planner - Login</title>
+  <!-- FontAwesome Icons -->
   <link
     rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6 as.5.0/css/all.min.css"
     integrity="sha512-..."
     crossorigin="anonymous"
   />
-
-  <!-- Google Fonts: Farmer-friendly, clean, readable -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Custom CSS -->
+  <!-- Custom CSS (will be added next) -->
   <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-  <!-- Main Container -->
-  <div class="container">
 
-    <!-- Header -->
-    <header class="header">
-      <div class="logo">
-        <i class="fas fa-seedling"></i> AI Crop Planner
+  <!-- ========================================
+       1. AUTH PAGES (Login / Register / Forgot)
+       ======================================== -->
+  <div id="authContainer" class="auth-container">
+
+    <!-- REGISTER PAGE -->
+    <div id="registerPage" class="auth-page">
+      <div class="auth-card">
+        <div class="auth-header">
+          <i class="fas fa-seedling auth-icon"></i>
+          <h2>Create Account</h2>
+          <p>Join AI Crop Planner for free</p>
+        </div>
+        <form id="registerForm" class="auth-form">
+          <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="regEmail" placeholder="Email Address" required />
+          </div>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="regPassword" placeholder="Password (min 6 chars)" minlength="6" required />
+          </div>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="regConfirmPassword" placeholder="Confirm Password" required />
+          </div>
+          <button type="submit" class="btn-auth btn-primary">
+            <i class="fas fa-user-plus"></i> Register
+          </button>
+        </form>
+        <div class="auth-footer">
+          <p>Already have an account? <span id="toLogin" class="link">Login here</span></p>
+        </div>
       </div>
-      <h1 class="title">Smart Crop Rotation for Healthy Farms</h1>
-      <p class="subtitle">
-        Get AI-powered crop suggestions & step-by-step organic guides
-      </p>
-    </header>
-
-    <!-- Input Form -->
-    <section class="form-section">
-      <form id="cropForm" class="input-form">
-        <div class="form-group">
-          <label for="month">
-            <i class="fas fa-calendar-alt"></i> Current Month
-          </label>
-          <select id="month" required>
-            <option value="" disabled selected>Select month</option>
-            <option value="January">January</option>
-            <option value="February">February</option>
-            <option value="March">March</option>
-            <option value="April">April</option>
-            <option value="May">May</option>
-            <option value="June">June</option>
-            <option value="July">July</option>
-            <option value="August">August</option>
-            <option value="September">September</option>
-            <option value="October">October</option>
-            <option value="November">November</option>
-            <option value="December">December</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="lastCrop">
-            <i class="fas fa-leaf"></i> Last Crop Planted
-          </label>
-          <select id="lastCrop" required>
-            <option value="" disabled selected>Select crop</option>
-            <!-- Options filled by JS -->
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="soilType">
-            <i class="fas fa-mountain"></i> Soil Type (Optional)
-          </label>
-          <select id="soilType">
-            <option value="any">Any / Not Sure</option>
-            <option value="loamy">Loamy</option>
-            <option value="clay">Clay</option>
-            <option value="sandy">Sandy</option>
-            <option value="silt">Silt</option>
-          </select>
-        </div>
-
-        <button type="submit" class="btn-primary" id="getSuggestion">
-          <i class="fas fa-magic"></i> Get AI Suggestion
-        </button>
-      </form>
-    </section>
-
-    <!-- Loading Spinner -->
-    <div id="loading" class="loading hidden">
-      <i class="fas fa-spinner fa-spin"></i>
-      <p>Analyzing soil & season...</p>
     </div>
 
-    <!-- Results Section -->
-    <section id="results" class="results hidden">
-      <h2><i class="fas fa-check-circle"></i> Recommended Crops</h2>
-
-      <div id="cropCards" class="crop-cards">
-        <!-- Crop cards injected here by JS -->
+    <!-- LOGIN PAGE -->
+    <div id="loginPage" class="auth-page hidden">
+      <div class="auth-card">
+        <div class="auth-header">
+          <i class="fas fa-seedling auth-icon"></i>
+          <h2>Welcome Back</h2>
+          <p>Login to your farm account</p>
+        </div>
+        <form id="loginForm" class="auth-form">
+          <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="loginEmail" placeholder="Email Address" required />
+          </div>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="loginPassword" placeholder="Password" required />
+          </div>
+          <div class="form-options">
+            <label><input type="checkbox" id="rememberMe" /> Remember me</label>
+            <span id="toForgot" class="link">Forgot password?</span>
+          </div>
+          <button type="submit" class="btn-auth btn-primary">
+            <i class="fas fa-sign-in-alt"></i> Login
+          </button>
+        </form>
+        <div class="auth-footer">
+          <p>Don't have an account? <span id="toRegister" class="link">Register here</span></p>
+        </div>
       </div>
+    </div>
 
-      <div class="pdf-actions">
-        <button id="downloadPDF" class="btn-secondary">
-          <i class="fas fa-download"></i> Download Full Plan (PDF)
-        </button>
+    <!-- FORGOT PASSWORD PAGE -->
+    <div id="forgotPage" class="auth-page hidden">
+      <div class="auth-card">
+        <div class="auth-header">
+          <i class="fas fa-key auth-icon"></i>
+          <h2>Reset Password</h2>
+          <p>Enter your email to change password</p>
+        </div>
+        <form id="forgotForm" class="auth-form">
+          <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="forgotEmail" placeholder="Your Email" required />
+          </div>
+          <button type="submit" class="btn-auth btn-primary">
+            <i class="fas fa-paper-plane"></i> Send Reset Link
+          </button>
+        </form>
+        <div class="auth-footer">
+          <p><span id="backToLogin" class="link">Back to Login</span></p>
+        </div>
       </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <p>&copy; 2025 AI Crop Planner </i> for Farmers</p>
-    </footer>
+    <!-- CHANGE PASSWORD PAGE (after reset) -->
+    <div id="changePasswordPage" class="auth-page hidden">
+      <div class="auth-card">
+        <div class="auth-header">
+          <i class="fas fa-lock auth-icon"></i>
+          <h2>Set New Password</h2>
+          <p>Choose a strong password</p>
+        </div>
+        <form id="changePasswordForm" class="auth-form">
+          <input type="hidden" id="changeEmail" />
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="newPassword" placeholder="New Password (min 6)" minlength="6" required />
+          </div>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="confirmNewPassword" placeholder="Confirm New Password" required />
+          </div>
+          <button type="submit" class="btn-auth btn-primary">
+            <i class="fas fa-check"></i> Update Password
+          </button>
+        </form>
+        <div class="auth-footer">
+          <p><span id="backToLogin2" class="link">Back to Login</span></p>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <!-- jsPDF + AutoTable for PDF generation -->
+  <!-- ========================================
+       2. MAIN APP (Hidden until login)
+       ======================================== -->
+  <div id="mainApp" class="hidden">
+    <!-- Your FULL ORIGINAL APP CODE BELOW -->
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="logo">
+          <i class="fas fa-seedling"></i> AI Crop Planner
+        </div>
+        <h1 class="title">Smart Crop Rotation for Healthy Farms</h1>
+        <p class="subtitle">
+          Get AI-powered crop suggestions & step-by-step organic guides
+        </p>
+        <div class="user-info">
+          <span>Welcome, <strong id="userDisplayName"></strong></span>
+          <button id="logoutBtn" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+      </header>
+
+      <!-- Input Form -->
+      <section class="form-section">
+        <form id="cropForm" class="input-form">
+          <div class="form-group">
+            <label for="month">
+              <i class="fas fa-calendar-alt"></i> Current Month
+            </label>
+            <select id="month" required>
+              <option value="" disabled>Select month</option>
+              <option value="January">January</option>
+              <option value="February">February</option>
+              <option value="March">March</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="June">June</option>
+              <option value="July">July</option>
+              <option value="August">August</option>
+              <option value="September">September</option>
+              <option value="October">October</option>
+              <option value="November" selected>November</option>
+              <option value="December">December</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="lastCrop">
+              <i class="fas fa-leaf"></i> Last Crop Planted
+            </label>
+            <select id="lastCrop" required>
+              <option value="" disabled selected>Select crop</option>
+              <!-- Filled by JS -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="soilType">
+              <i class="fas fa-mountain"></i> Soil Type (Optional)
+            </label>
+            <select id="soilType">
+              <option value="any">Any / Not Sure</option>
+              <option value="loamy">Loamy</option>
+              <option value="clay">Clay</option>
+              <option value="sandy">Sandy</option>
+              <option value="silt">Silt</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary" id="getSuggestion">
+            <i class="fas fa-magic"></i> Get AI Suggestion
+          </button>
+        </form>
+      </section>
+
+      <!-- Loading Spinner -->
+      <div id="loading" class="loading hidden">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Analyzing soil & season...</p>
+      </div>
+
+      <!-- Results Section -->
+      <section id="results" class="results hidden">
+        <h2><i class="fas fa-check-circle"></i> Recommended Crops</h2>
+        <div id="cropCards" class="crop-cards">
+          <!-- Crop cards injected here by JS -->
+        </div>
+        <div class="pdf-actions">
+          <button id="downloadPDF" class="btn-secondary">
+            <i class="fas fa-download"></i> Download Full Plan (PDF)
+          </button>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p>© 2025 AI Crop Planner for Farmers</p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- jsPDF + AutoTable -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
-
-  <!-- Custom JavaScript -->
+  <!-- Custom JS (will be updated next) -->
   <script src="script.js"></script>
 </body>
-
 </html>
